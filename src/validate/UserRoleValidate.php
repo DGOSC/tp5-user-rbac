@@ -1,7 +1,7 @@
 <?php
 /******************************************************************************
- * 描述：管理员权限管理
- * 文件：userPermission.php
+ * 描述：管理员角色
+ * 文件：userRole.php
  * ============================================================================
  * 版权所有 2007-2019 武汉道广科技有限公司，并保留所有权利。
  * 网站地址: http://www.dgosc.com；
@@ -11,32 +11,23 @@
  * ============================================================================
  * 作者: Nginx
  * 日期：2020年12月01日
- * 时间：09:37
+ * 时间：16:43
  ******************************************************************************/
 
 namespace dgosc\user\rbac\validate;
 
 use think\Validate;
 
-class UserPermission extends Validate
+class UserRoleValidate extends Validate
 {
     protected $rule = [
-        'name' => 'require|max:50|unique:dgosc\user\rbac\model\userpermission,name',
-        'path' => 'require|max:200|unique:dgosc\user\rbac\model\userpermission,path',
-        'category_id' => 'require|number',
-        'type' => 'require'
+        'name' => 'require|max:50|unique:gmars\rbac\model\role,name^id'
     ];
 
     protected $message = [
-        'name.require' => '权限名不能为空',
-        'name.max' => '权限名不能长于50个字符',
-        'path.require' => '路径不能为空',
-        'path.max' => '路径不能长于200个字符',
-        'category_id.require' => '权限分类必须选择',
-        'category_id.number' => '权限分类必须是数字id',
-        'name.unique' => '权限名称不能重复',
-        'path.unique' => '权限路径不能为空',
-        'type.require' => '权限类型不能为空'
+        'name.require' => '角色名不能为空',
+        'name.max' => '角色名不能长于50个字符',
+        'name.unique' => '角色名称不能重复'
     ];
 
 }

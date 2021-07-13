@@ -66,7 +66,7 @@ class UserRbac
      */
     public function createTable($db = '')
     {
-        $createTable = new userCreateTable();
+        $createTable = new UserCreateTable();
         $createTable->create($db);
     }
 
@@ -103,7 +103,7 @@ class UserRbac
      */
     public function createPermission(array $data = [])
     {
-        $model = new userPermission($this->db);
+        $model = new UserPermission($this->db);
         $model->data($data);
         try{
             $res = $model->savePermission();
@@ -154,7 +154,7 @@ class UserRbac
      */
     public function delPermission($id = 0)
     {
-        $model = new userPermission($this->db);
+        $model = new UserPermission($this->db);
         try {
             return $model->delPermission($id);
         } catch (Exception $e) {
@@ -177,7 +177,7 @@ class UserRbac
      */
     public function delPermissionBatch($condition)
     {
-        $model = new userPermission($this->db);
+        $model = new UserPermission($this->db);
         if ($model->where($condition)->delete() === false) {
             throw new Exception('批量删除数据出错');
         }
@@ -199,7 +199,7 @@ class UserRbac
      */
     public function getPermission($condition)
     {
-        $model = new userPermission($this->db);
+        $model = new UserPermission($this->db);
         return $model->getuserPermission($condition);
     }
 
@@ -219,7 +219,7 @@ class UserRbac
      */
     public function savePermissionCategory(array $data = [])
     {
-        $model = new userPermissionCategory($this->db);
+        $model = new UserPermissionCategory($this->db);
         $model->data($data);
         try{
             $res = $model->saveCategory();
@@ -245,7 +245,7 @@ class UserRbac
      */
     public function delPermissionCategory($id = 0)
     {
-        $model = new userPermissionCategory($this->db);
+        $model = new UserPermissionCategory($this->db);
         try {
             $res = $model->delCategory($id);
             return $res;
@@ -269,7 +269,7 @@ class UserRbac
      */
     public function getPermissionCategory($where)
     {
-        $model = new userPermissionCategory($this->db);
+        $model = new UserPermissionCategory($this->db);
         return $model->getCategory($where);
     }
 
@@ -429,8 +429,8 @@ class UserRbac
         if (empty($id)) {
             throw new Exception('参数错误');
         }
-        $model = new userPermission($this->db);
-        $permission = $model->userPermission($id, $timeOut);
+        $model = new UserPermission($this->db);
+        $permission = $model->UserPermission($id, $timeOut);
         return $permission;
     }
 
@@ -494,8 +494,8 @@ class UserRbac
     {
         $token = md5($prefix . $this->randCode(32) . $this->saltToken . time());
         $freshTOken = md5($prefix . $this->randCode(32) . $this->saltToken . time());
-        $permissionModel = new userPermission($this->db);
-        $permission = $permissionModel->getPermissionByuserUserId($userId);
+        $permissionModel = new UserPermission($this->db);
+        $permission = $permissionModel->getPermissionByUserUserId($userId);
         //无权限时为登录验证用
         if (!empty($permission)) {
             $newPermission = [];
@@ -619,7 +619,7 @@ class UserRbac
      * 邮箱: dgosc@163.com
      * 日期：2020年12月02日 10:04
      * =====================================================================================
-     * * @param $roleId
+     * @param $roleId
      * @param array $permission
      * @throws Exception
      ***************************************************************************************

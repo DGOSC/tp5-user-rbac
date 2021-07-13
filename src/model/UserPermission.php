@@ -15,15 +15,16 @@
  ******************************************************************************/
 
 namespace dgosc\user\rbac\model;
+use dgosc\user\rbac\validate\UserPermissionValidate;
 use think\Db;
 use think\Exception;
 use think\facade\Cache;
 use think\facade\Session;
 
-class UserPermission extends userBase
+class UserPermission extends UserBase
 {
 
-    private $_permissionCachePrefix = "_user_RBAC_PERMISSION_CACHE_";
+    private $_permissionCachePrefix = "_USER_RBAC_PERMISSION_CACHE_";
     protected $auto = ['path_id'];
 
     protected function setPathIdAttr()
@@ -44,12 +45,12 @@ class UserPermission extends userBase
      * @return $this
      ***************************************************************************************
      */
-    public function saveuserPermission($data = [])
+    public function saveUserPermission($data = [])
     {
         if (!empty($data)) {
             $this->data($data);
         }
-        $validate = new \dgosc\user\rbac\validate\UserPermission();
+        $validate = new UserPermissionValidate();
         if (!$validate->check($this)) {
             throw new Exception($validate->getError());
         }
@@ -103,7 +104,7 @@ class UserPermission extends userBase
         if (!empty($permission)) {
             return $permission;
         }
-        $permission = $this->getPermissionByuserId($userId);
+        $permission = $this->getPermissionByUserUserId($userId);
         if (empty($permission)) {
             throw new Exception('未查询到该用户的任何权限');
         }

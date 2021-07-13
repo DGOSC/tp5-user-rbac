@@ -15,7 +15,7 @@
  ******************************************************************************/
 
 namespace dgosc\user\rbac\model;
-
+use dgosc\user\rbac\validate\UserPermissionCategoryValidate;
 use think\Db;
 use think\Exception;
 
@@ -40,7 +40,7 @@ class UserPermissionCategory extends UserBase
         if (!empty($data)) {
             $this->data($data);
         }
-        $validate = new \dgosc\user\rbac\validate\UserPermissionCategory();
+        $validate = new UserPermissionCategoryValidate();
         if (!$validate->check($this)) {
             throw new Exception($validate->getError());
         }

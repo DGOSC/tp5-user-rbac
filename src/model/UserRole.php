@@ -16,7 +16,7 @@
 
 namespace dgosc\user\rbac\model;
 
-use gmars\rbac\model\RolePermission;
+use dgosc\user\rbac\validate\UserRoleValidate;
 use think\Db;
 use think\Exception;
 
@@ -42,7 +42,7 @@ class UserRole extends UserBase
         if (!empty($data)) {
             $this->data($data);
         }
-        $validate = new \dgosc\user\rbac\validate\UserRole();
+        $validate = new UserRoleValidate();
         if (!$validate->check($this)) {
             throw new Exception($validate->getError());
         }
@@ -66,7 +66,7 @@ class UserRole extends UserBase
             return $this;
         }
         //删除原有权限
-        $rolePermission = new userRolePermission($this->connection);
+        $rolePermission = new UserRolePermission($this->connection);
         if ($rolePermission->where('role_id', $this->id)->delete() === false) {
             $this->rollback();
             throw new Exception('删除原有权限时出错');

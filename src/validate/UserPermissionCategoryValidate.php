@@ -1,7 +1,7 @@
 <?php
 /******************************************************************************
- * 描述：管理员角色
- * 文件：userRole.php
+ * 描述：管理员权限分类
+ * 文件：userPermissionCategory.php
  * ============================================================================
  * 版权所有 2007-2019 武汉道广科技有限公司，并保留所有权利。
  * 网站地址: http://www.dgosc.com；
@@ -11,23 +11,23 @@
  * ============================================================================
  * 作者: Nginx
  * 日期：2020年12月01日
- * 时间：16:43
+ * 时间：16:41
  ******************************************************************************/
 
 namespace dgosc\user\rbac\validate;
 
 use think\Validate;
 
-class UserRole extends Validate
+class UserPermissionCategoryValidate extends  Validate
 {
     protected $rule = [
-        'name' => 'require|max:50|unique:gmars\rbac\model\role,name^id'
+        'name' => 'require|max:50|unique:dgosc\user\rbac\model\userpermissioncategory,name',
     ];
 
     protected $message = [
-        'name.require' => '角色名不能为空',
-        'name.max' => '角色名不能长于50个字符',
-        'name.unique' => '角色名称不能重复'
+        'name.require' => '分组名不能为空',
+        'name.max' => '分组名不能长于50个字符',
+        'name.unique' => '分组名称不能重复',
     ];
 
 }
