@@ -1,0 +1,16 @@
+{
+    "name": "dgosc/tp5-user-rbac",
+    "description": "tp5-user-rbac",
+    "autoload": {
+        "psr-4": {
+            "Dgosc\\Tp5UserRbac\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nginx",
+            "email": "100861690@qq.com"
+        }
+    ],
+    "require": {}
+}
